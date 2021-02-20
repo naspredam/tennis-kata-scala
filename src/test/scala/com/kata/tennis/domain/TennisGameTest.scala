@@ -68,4 +68,57 @@ class TennisGameTest extends AnyFlatSpec with Matchers {
     val gameWithNewScore = playerTwo winPointOn game
     gameWithNewScore.score() shouldEqual "Game to player 2"
   }
+
+  "Game" should "be won by player one, when we have a full game played, straightforward..." in {
+    val startedGame = TennisGame start(playerOne, playerTwo)
+    startedGame.score() shouldEqual "love - love"
+
+    val gameWithOnePointPlayed = playerOne winPointOn startedGame
+    gameWithOnePointPlayed.score() shouldEqual "fifteen - love"
+
+    val gameWithTwoPointPlayed = playerOne winPointOn gameWithOnePointPlayed
+    gameWithTwoPointPlayed.score() shouldEqual "thirty - love"
+
+    val gameWithThreePointPlayed = playerOne winPointOn gameWithTwoPointPlayed
+    gameWithThreePointPlayed.score() shouldEqual "forty - love"
+
+    val gameWithFourPointPlayed = playerOne winPointOn gameWithThreePointPlayed
+    gameWithFourPointPlayed.score() shouldEqual "Game to player 1"
+  }
+
+  "Game" should "be won by player two, when we have a full game played, with some difficulties..." in {
+    val startedGame = TennisGame start(playerOne, playerTwo)
+    startedGame.score() shouldEqual "love - love"
+
+    val gameWithOnePointPlayed = playerTwo winPointOn startedGame
+    gameWithOnePointPlayed.score() shouldEqual "love - fifteen"
+
+    val gameWithTwoPointPlayed = playerTwo winPointOn gameWithOnePointPlayed
+    gameWithTwoPointPlayed.score() shouldEqual "love - thirty"
+
+    val gameWithThreePointPlayed = playerOne winPointOn gameWithTwoPointPlayed
+    gameWithThreePointPlayed.score() shouldEqual "fifteen - thirty"
+
+    val gameWithFourPointPlayed = playerOne winPointOn gameWithThreePointPlayed
+    gameWithFourPointPlayed.score() shouldEqual "thirty - thirty"
+
+    val gameWithFivePointPlayed = playerOne winPointOn gameWithFourPointPlayed
+    gameWithFivePointPlayed.score() shouldEqual "forty - thirty"
+
+    val gameWithSixPointPlayed = playerTwo winPointOn gameWithFivePointPlayed
+    gameWithSixPointPlayed.score() shouldEqual "forty - forty"
+
+    val gameWithSevenPointPlayed = playerTwo winPointOn gameWithSixPointPlayed
+    gameWithSevenPointPlayed.score() shouldEqual "advantage for player 2"
+
+    val gameWithEightPointPlayed = playerOne winPointOn gameWithSevenPointPlayed
+    gameWithEightPointPlayed.score() shouldEqual "deuce"
+
+    val gameWithNinePointPlayed = playerTwo winPointOn gameWithEightPointPlayed
+    gameWithNinePointPlayed.score() shouldEqual "advantage for player 2"
+
+    val gameWithTenPointPlayed = playerTwo winPointOn gameWithNinePointPlayed
+    gameWithTenPointPlayed.score() shouldEqual "Game to player 2"
+  }
+
 }
