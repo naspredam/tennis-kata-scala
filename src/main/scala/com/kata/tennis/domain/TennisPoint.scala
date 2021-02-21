@@ -1,10 +1,10 @@
 package com.kata.tennis.domain
 
-sealed abstract class TennisPoint(val text: String)
-case object Love extends TennisPoint("love")
-case object Fifteen extends TennisPoint("fifteen")
-case object Thirty extends TennisPoint("thirty")
-case object Forty extends TennisPoint("forty")
+sealed abstract class TennisPoint(val displayText: String)
+case object Love extends TennisPoint("0")
+case object Fifteen extends TennisPoint("15")
+case object Thirty extends TennisPoint("30")
+case object Forty extends TennisPoint("40")
 
 object PointHelper {
   implicit class PointOps(tennisPoint: TennisPoint) {

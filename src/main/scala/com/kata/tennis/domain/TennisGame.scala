@@ -5,10 +5,10 @@ class TennisGame(playerOne: GamePlayer,
                  score: Score = Score()) {
 
   def score(): String = score.status match {
-    case Running => s"${score.playerOnePoint.text} - ${score.playerTwoPoint.text}"
-    case Advantage => s"${score.status.text} for player ${if (score.playerOnePoint == Forty) 1 else 2}"
+    case Running => s"${score.playerOnePoint.displayText} - ${score.playerTwoPoint.displayText}"
+    case Advantage => s"${score.status.displayText} for player ${if (score.playerOnePoint == Forty) 1 else 2}"
     case Won => s"Game to player ${if (score.playerOnePoint == Forty) 1 else 2}"
-    case _ => score.status.text
+    case _ => score.status.displayText
   }
 
   def playerWonPoint(gamePlayer: GamePlayer): TennisGame = {

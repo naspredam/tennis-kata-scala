@@ -1,6 +1,6 @@
 package com.kata.tennis.domain
 
-sealed abstract class ScoreStatus(val text: String)
+sealed abstract class ScoreStatus(val displayText: String)
 case object Running extends ScoreStatus("running")
 case object Deuce extends ScoreStatus("deuce")
 case object Advantage extends ScoreStatus("advantage")

@@ -10,33 +10,33 @@ class TennisGameTest extends AnyFlatSpec with Matchers {
 
   "Game" should "start the game with score love-love" in {
     val game = TennisGame.start(playerOne, playerTwo)
-    game.score() shouldEqual "love - love"
+    game.score() shouldEqual "0 - 0"
   }
 
   "Game" should "be fifteen-love when player one wins a point" in {
     val game = TennisGame.start(playerOne, playerTwo)
     val gameWithNewScore = playerOne winPointOn game
-    gameWithNewScore.score() shouldEqual "fifteen - love"
+    gameWithNewScore.score() shouldEqual "15 - 0"
   }
 
   "Game" should "be love-fifteen when player two wins a point" in {
     val game = TennisGame.start(playerOne, playerTwo)
     val gameWithNewScore = playerTwo winPointOn game
-    gameWithNewScore.score() shouldEqual "love - fifteen"
+    gameWithNewScore.score() shouldEqual "0 - 15"
   }
 
   "Game" should "be fifteen-fifteen when both players won a point" in {
     val game = TennisGame.start(playerOne, playerTwo)
     val gameWithNewScoreFirst = playerOne winPointOn game
     val gameWithNewScore = playerTwo winPointOn gameWithNewScoreFirst
-    gameWithNewScore.score() shouldEqual "fifteen - fifteen"
+    gameWithNewScore.score() shouldEqual "15 - 15"
   }
 
   "Game" should "be thirty-love when players one won (only player one) two point" in {
     val game = TennisGame.start(playerOne, playerTwo)
     val gameWithNewScoreFirst = playerOne winPointOn game
     val gameWithNewScore = playerOne winPointOn gameWithNewScoreFirst
-    gameWithNewScore.score() shouldEqual "thirty - love"
+    gameWithNewScore.score() shouldEqual "30 - 0"
   }
 
   "Game" should "be deuce when the advantage is reduced" in {
@@ -71,16 +71,16 @@ class TennisGameTest extends AnyFlatSpec with Matchers {
 
   "Game" should "be won by player one, when we have a full game played, straightforward..." in {
     val startedGame = TennisGame start(playerOne, playerTwo)
-    startedGame.score() shouldEqual "love - love"
+    startedGame.score() shouldEqual "0 - 0"
 
     val gameWithOnePointPlayed = playerOne winPointOn startedGame
-    gameWithOnePointPlayed.score() shouldEqual "fifteen - love"
+    gameWithOnePointPlayed.score() shouldEqual "15 - 0"
 
     val gameWithTwoPointPlayed = playerOne winPointOn gameWithOnePointPlayed
-    gameWithTwoPointPlayed.score() shouldEqual "thirty - love"
+    gameWithTwoPointPlayed.score() shouldEqual "30 - 0"
 
     val gameWithThreePointPlayed = playerOne winPointOn gameWithTwoPointPlayed
-    gameWithThreePointPlayed.score() shouldEqual "forty - love"
+    gameWithThreePointPlayed.score() shouldEqual "40 - 0"
 
     val gameWithFourPointPlayed = playerOne winPointOn gameWithThreePointPlayed
     gameWithFourPointPlayed.score() shouldEqual "Game to player 1"
@@ -88,25 +88,25 @@ class TennisGameTest extends AnyFlatSpec with Matchers {
 
   "Game" should "be won by player two, when we have a full game played, with some difficulties..." in {
     val startedGame = TennisGame start(playerOne, playerTwo)
-    startedGame.score() shouldEqual "love - love"
+    startedGame.score() shouldEqual "0 - 0"
 
     val gameWithOnePointPlayed = playerTwo winPointOn startedGame
-    gameWithOnePointPlayed.score() shouldEqual "love - fifteen"
+    gameWithOnePointPlayed.score() shouldEqual "0 - 15"
 
     val gameWithTwoPointPlayed = playerTwo winPointOn gameWithOnePointPlayed
-    gameWithTwoPointPlayed.score() shouldEqual "love - thirty"
+    gameWithTwoPointPlayed.score() shouldEqual "0 - 30"
 
     val gameWithThreePointPlayed = playerOne winPointOn gameWithTwoPointPlayed
-    gameWithThreePointPlayed.score() shouldEqual "fifteen - thirty"
+    gameWithThreePointPlayed.score() shouldEqual "15 - 30"
 
     val gameWithFourPointPlayed = playerOne winPointOn gameWithThreePointPlayed
-    gameWithFourPointPlayed.score() shouldEqual "thirty - thirty"
+    gameWithFourPointPlayed.score() shouldEqual "30 - 30"
 
     val gameWithFivePointPlayed = playerOne winPointOn gameWithFourPointPlayed
-    gameWithFivePointPlayed.score() shouldEqual "forty - thirty"
+    gameWithFivePointPlayed.score() shouldEqual "40 - 30"
 
     val gameWithSixPointPlayed = playerTwo winPointOn gameWithFivePointPlayed
-    gameWithSixPointPlayed.score() shouldEqual "forty - forty"
+    gameWithSixPointPlayed.score() shouldEqual "40 - 40"
 
     val gameWithSevenPointPlayed = playerTwo winPointOn gameWithSixPointPlayed
     gameWithSevenPointPlayed.score() shouldEqual "advantage for player 2"
