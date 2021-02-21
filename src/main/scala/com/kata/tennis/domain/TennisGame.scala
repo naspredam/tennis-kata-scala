@@ -6,9 +6,9 @@ class TennisGame(playerOne: GamePlayer,
 
   def score(): String = score.status match {
     case Running => s"${score.playerOnePoint.displayText} - ${score.playerTwoPoint.displayText}"
-    case Advantage => s"${score.status.displayText} for player ${if (score.playerOnePoint == Forty) 1 else 2}"
+    case Advantage => s"${score.status.text} for player ${if (score.playerOnePoint == Forty) 1 else 2}"
     case Won => s"Game to player ${if (score.playerOnePoint == Forty) 1 else 2}"
-    case _ => score.status.displayText
+    case _ => score.status.text
   }
 
   def playerWonPoint(gamePlayer: GamePlayer): TennisGame = {
